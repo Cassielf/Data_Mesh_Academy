@@ -1,0 +1,30 @@
+{
+  "Comment": "Execução sequencial de Glue Jobs",
+  "StartAt": "Acionar Glue Job corp_produto_cartao_credito_sor_byanca",
+  "States": {
+    "Acionar Glue Job corp_produto_cartao_credito_sor_byanca": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::glue:startJobRun.sync",
+      "Parameters": {
+        "JobName": "corp_produto_cartao_credito_sor_byanca"
+      },
+      "Next": "Acionar Glue Job corp_produto_cartao_credito_sot_byanca"
+    },
+    "Acionar Glue Job corp_produto_cartao_credito_sot_byanca": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::glue:startJobRun.sync",
+      "Parameters": {
+        "JobName": "corp_produto_cartao_credito_sot_byanca"
+      },
+      "Next": "Acionar Glue Job corp_produto_cartao_credito_spec_byanca"
+    },
+    "Acionar Glue Job corp_produto_cartao_credito_spec_byanca": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::glue:startJobRun.sync",
+      "Parameters": {
+        "JobName": "corp_produto_cartao_credito_spec_byanca"
+      },
+      "End": true
+    }
+  }
+}
